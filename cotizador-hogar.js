@@ -11,9 +11,10 @@ const QLOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA5gAAAOYCAIAAAA/qsvqA
   function syncTipo(){
     const t=$('q-tipo').value;
     const lbl=$('q-inm-label'), tog=$('q-calc-toggle');
-    if(t==='casa'){ lbl.textContent='Valor de reconstrucción (US$)'; tog.hidden=false; }
-    else if(t==='depto'){ lbl.textContent='Valor comercial del inmueble (US$)'; tog.hidden=true; $('q-calc').hidden=true; }
-    else { lbl.textContent='Valor del inmueble (US$)'; tog.hidden=true; $('q-calc').hidden=true; }
+    tog.hidden=true; // la calculadora ahora aparece directamente en "Casa"
+    if(t==='casa'){ lbl.textContent='Valor de reconstrucción (US$)'; $('q-calc').hidden=false; }
+    else if(t==='depto'){ lbl.textContent='Valor comercial del inmueble (US$)'; $('q-calc').hidden=true; }
+    else { lbl.textContent='Valor del inmueble (US$)'; $('q-calc').hidden=true; }
   }
   function calcM2(){ const m=parseFloat($('q-m2').value)||0; $('q-m2-val').textContent=fmt(m*M2); }
 
