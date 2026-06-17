@@ -123,6 +123,7 @@
   .q2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .qlink{align-self:flex-start;background:none;border:none;color:#1F857A;font:600 13px var(--body);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0}
   .qcalc{border:1px dashed #36A89B;border-radius:12px;padding:14px;background:#f0f7f6;display:flex;flex-direction:column;gap:10px}
+  .qcalc[hidden]{display:none}
   .qcalc-t{font-weight:700;font-size:13px;color:#1F857A}
   .qcalc-r{font-size:14px;color:#33474d}.qcalc-r small{color:#7c8c90}
   .qbtn{background:#0c2a33;color:#fff;border:none;border-radius:999px;padding:14px 22px;font:700 15px var(--body);cursor:pointer;transition:transform .15s, background .15s;margin-top:6px}
