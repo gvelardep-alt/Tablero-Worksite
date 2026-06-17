@@ -1,0 +1,43 @@
+TABLERO DE SEGUROS – VERSIÓN WEB (multi-archivo)
+=================================================
+
+POR QUÉ ESTA VERSIÓN
+--------------------
+El archivo único anterior llevaba todo incrustado (CSS, JavaScript y videos en
+base64) y cargaba tipografías desde internet. Muchos equipos corporativos con
+proxy/VPN y filtros de seguridad BLOQUEAN el contenido incrustado y los datos
+base64, por eso se veía "todo junto", sin videos ni interacción.
+
+Esta versión separa todo en archivos normales y NO usa internet. Los filtros
+corporativos la aceptan sin problema.
+
+CÓMO PUBLICARLA (lo recomendado)
+--------------------------------
+Sube TODA la carpeta (respetando la estructura) a un hosting de archivos
+estáticos o al servidor/intranet de la empresa, y comparte el enlace que
+termine en /index.html. Sirve cualquiera de estos:
+  - El servidor o intranet de tu empresa
+  - Hosting estático: Netlify, Vercel, GitHub Pages, Cloudflare Pages, etc.
+  - Cualquier servidor web (Apache, Nginx, IIS)
+
+ESTRUCTURA (no cambiar los nombres ni mover archivos)
+-----------------------------------------------------
+  index.html
+  styles.css
+  lib-pdf.js
+  app.js
+  cotizador-hogar.js
+  cotizador-vehicular.js
+  videos/vehicular.mp4
+  videos/domiciliario.mp4
+
+PRUEBA RÁPIDA LOCAL
+-------------------
+También puedes hacer doble clic en index.html para verlo en tu PC. Si tu
+navegador restringe la reproducción local, ábrelo con un servidor simple:
+  - Con Python:  python -m http.server 8000   (y entra a http://localhost:8000)
+
+SIN INTERNET
+------------
+Una vez publicada (o en local), funciona 100% sin conexión: videos,
+cotizadores y generación de PDF descargable.
