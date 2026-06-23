@@ -89,6 +89,9 @@ bigplay.addEventListener('click', () => {
                .catch(() => { bigplay.hidden = false; });
 });
 
+// Saltar el video y pasar directo al cotizador
+document.getElementById('skip-video').addEventListener('click', () => { if(currentKey) goToQuote(currentKey); });
+
 function onVideoError(){
   // No avanza al cotizador si el video no corre
   bigplay.hidden = true;

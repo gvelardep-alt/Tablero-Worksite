@@ -17,9 +17,17 @@ const QLOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA5gAAAOYCAIAAAA/qsvqA
     else { lbl.textContent='Valor del inmueble (US$)'; $('q-calc').hidden=true; }
   }
   function calcM2(){ const m=parseFloat($('q-m2').value)||0; $('q-m2-val').textContent=fmt(m*M2); }
+  function validBtn(){
+    const f=id=>($(id).value||'').trim()!=='';
+    const dniOk=/^\d{8}$/.test($('q-dni').value.trim());
+    const mailOk=/.+@.+\..+/.test($('q-mail').value.trim());
+    const ok=f('q-nombre')&&dniOk&&f('q-cel')&&mailOk&&$('q-tipo').value!==''&&(parseFloat($('q-inmueble').value)||0)>0&&(parseFloat($('q-contenido').value)||0)>0;
+    if($('q-cotizar')) $('q-cotizar').disabled=!ok; return ok;
+  }
 
   function cotizar(){
     const err=$('q-err'); err.hidden=true;
+    if(!validBtn()){ err.textContent='Completa todos los campos obligatorios.'; err.hidden=false; return; }
     const inm=parseFloat($('q-inmueble').value)||0;
     const cont=parseFloat($('q-contenido').value)||0;
     if(!$('q-tipo').value){ err.textContent='Selecciona el tipo de vivienda.'; err.hidden=false; return; }
@@ -126,7 +134,7 @@ const QLOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA5gAAAOYCAIAAAA/qsvqA
   function reset(){
     ['q-nombre','q-dni','q-cel','q-mail','q-inmueble','q-contenido','q-m2'].forEach(i=>{const e=$(i); if(e) e.value='';});
     $('q-tipo').value=''; syncTipo(); $('q-calc').hidden=true; $('q-result').hidden=true;
-    $('q-empty').hidden=false; $('q-err').hidden=true; $('q-pdf-note').textContent=''; last=null;
+    $('q-empty').hidden=false; $('q-err').hidden=true; $('q-pdf-note').textContent=''; last=null; validBtn();
   }
 
   function bind(){
@@ -137,6 +145,9 @@ const QLOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA5gAAAOYCAIAAAA/qsvqA
     $('q-cotizar').addEventListener('click',cotizar);
     $('q-pdf').addEventListener('click',genPDF);
     $('q-send').addEventListener('click',emision);
+    $('q-dni').addEventListener('input',()=>{ $('q-dni').value=$('q-dni').value.replace(/\D/g,'').slice(0,8); });
+    ['q-nombre','q-dni','q-cel','q-mail','q-tipo','q-inmueble','q-contenido'].forEach(id=>{ const e=$(id); if(e){ e.addEventListener('input',validBtn); e.addEventListener('change',validBtn);} });
+    validBtn();
   }
   if(document.readyState!=='loading') bind(); else document.addEventListener('DOMContentLoaded',bind);
   window.QHogar={reset};

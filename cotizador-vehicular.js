@@ -46,10 +46,20 @@ const QVDATA={"marcas": ["Toyota", "Hyundai", "Kia", "Nissan", "Suzuki", "Volksw
     $('v-msg-otro').hidden = (u!=='otro');
     if(u!=='particular'){ $('v-result').hidden=true; $('v-msg-eval').hidden=true; $('v-empty').hidden=(u==='otro'); }
     else { $('v-empty').hidden=false; }
+    validBtn();
   }
 
+  function validBtn(){
+    const f=id=>($(id).value||'').trim()!=='';
+    const docOk=/^\d{8}$/.test($('v-doc').value.trim());
+    const mailOk=/.+@.+\..+/.test($('v-mail').value.trim());
+    const yr=new Date().getFullYear(); const anio=parseInt($('v-anio').value)||0;
+    const ok=f('v-nombre')&&docOk&&f('v-cel')&&mailOk&&$('v-uso').value==='particular'&&$('v-tipo').value!==''&&f('v-marca')&&$('v-origen').value!==''&&f('v-modelo')&&(anio>=1990&&anio<=yr+1)&&(parseFloat($('v-valor').value)||0)>0;
+    if($('v-cotizar')) $('v-cotizar').disabled=!ok; return ok;
+  }
   function cotizar(){
     const err=$('v-err'); err.hidden=true; $('v-msg-eval').hidden=true; $('v-result').hidden=true;
+    if(!validBtn()){ err.textContent='Completa todos los campos obligatorios.'; err.hidden=false; return; }
     const tipo=$('v-tipo').value, marca=$('v-marca').value.trim(), origen=$('v-origen').value;
     const modelo=$('v-modelo').value.trim(), version=$('v-version').value.trim();
     const anio=parseInt($('v-anio').value)||0, valor=parseFloat($('v-valor').value)||0;
@@ -180,7 +190,7 @@ const QVDATA={"marcas": ["Toyota", "Hyundai", "Kia", "Nissan", "Suzuki", "Volksw
     ['v-uso','v-tipo','v-origen'].forEach(i=>{const e=$(i);if(e)e.value='';});
     $('v-vehfields').hidden=true; $('v-msg-otro').hidden=true; $('v-msg-eval').hidden=true;
     $('v-result').hidden=true; $('v-empty').hidden=false; $('v-err').hidden=true;
-    $('v-min-note').hidden=true; $('v-pdf-note').textContent=''; last=null;
+    $('v-min-note').hidden=true; $('v-pdf-note').textContent=''; last=null; validBtn();
   }
   function bind(){
     fillMarcas();
@@ -188,6 +198,9 @@ const QVDATA={"marcas": ["Toyota", "Hyundai", "Kia", "Nissan", "Suzuki", "Volksw
     $('v-cotizar').addEventListener('click',cotizar);
     $('v-pdf').addEventListener('click',genPDF);
     $('v-send').addEventListener('click',emision);
+    $('v-doc').addEventListener('input',()=>{ $('v-doc').value=$('v-doc').value.replace(/\D/g,'').slice(0,8); });
+    ['v-nombre','v-doc','v-cel','v-mail','v-tipo','v-marca','v-origen','v-modelo','v-anio','v-valor'].forEach(id=>{ const e=$(id); if(e){ e.addEventListener('input',validBtn); e.addEventListener('change',validBtn);} });
+    validBtn();
   }
   if(document.readyState!=='loading') bind(); else document.addEventListener('DOMContentLoaded',bind);
   window.QVeh={reset};

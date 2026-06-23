@@ -74,6 +74,9 @@
 
   .stage-msg{margin-top:14px;text-align:center;color:var(--muted);font-size:13.5px;min-height:18px}
   .stage-msg .retry{margin-left:8px;color:var(--paper);text-decoration:underline;background:none;border:none;cursor:pointer;font:inherit}
+  .stage-actions{display:flex;justify-content:center;margin-top:16px}
+  .skipvid{background:none;border:1px solid var(--line);color:var(--paper);font:600 14px var(--body);padding:11px 24px;border-radius:999px;cursor:pointer;transition:background .18s}
+  .skipvid:hover{background:rgba(244,246,245,.10)}
 
   /* ---------- QUOTE (se desliza hacia arriba) ---------- */
   #quote{background:var(--ink);padding:0;flex-direction:column;align-items:stretch;justify-content:flex-start;
@@ -128,6 +131,7 @@
   .qcalc-r{font-size:14px;color:#33474d}.qcalc-r small{color:#7c8c90}
   .qbtn{background:#0c2a33;color:#fff;border:none;border-radius:999px;padding:14px 22px;font:700 15px var(--body);cursor:pointer;transition:transform .15s, background .15s;margin-top:6px}
   .qbtn:hover{background:#13414f;transform:translateY(-1px)}
+  .qbtn:disabled,.qbtn:disabled:hover{background:#b9c6c4;color:#eef3f2;cursor:not-allowed;transform:none}
   .qbtn-pdf{background:#36A89B}.qbtn-pdf:hover{background:#1F857A}
   .qbtn-mini{align-self:flex-start;background:#36A89B;color:#fff;border:none;border-radius:8px;padding:8px 14px;font:700 13px var(--body);cursor:pointer}
   .qerr{color:#c0392b;font-size:13px;font-weight:600}.qerr[hidden]{display:none}

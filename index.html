@@ -80,6 +80,9 @@
         </button>
       </div>
       <div class="stage-msg" id="stage-msg"></div>
+      <div class="stage-actions">
+        <button class="skipvid" id="skip-video" type="button">Saltar video →</button>
+      </div>
     </div>
   </section>
 
@@ -103,7 +106,7 @@
           <div class="qcol">
             <div class="qsec">Datos del cliente</div>
             <label>Nombre del cliente<input id="v-nombre" type="text" placeholder="Nombre y apellidos"></label>
-            <label>Documento de identidad<input id="v-doc" type="text" placeholder="DNI / CE / RUC"></label>
+            <label>Documento de identidad (DNI)<input id="v-doc" type="text" inputmode="numeric" maxlength="8" placeholder="8 dígitos"></label>
             <div class="q2">
               <label>Celular<input id="v-cel" type="tel" placeholder="999 999 999"></label>
               <label>Correo<input id="v-mail" type="email" placeholder="correo@ejemplo.com"></label>
@@ -203,7 +206,7 @@
           <div class="qcol">
             <div class="qsec">Datos del asegurado</div>
             <label>Nombre completo<input id="q-nombre" type="text" placeholder="Nombre y apellidos"></label>
-            <label>DNI / RUC<input id="q-dni" type="text" placeholder="N.° de documento"></label>
+            <label>DNI<input id="q-dni" type="text" inputmode="numeric" maxlength="8" placeholder="8 dígitos"></label>
             <div class="q2">
               <label>Celular<input id="q-cel" type="tel" placeholder="999 999 999"></label>
               <label>Correo<input id="q-mail" type="email" placeholder="correo@ejemplo.com"></label>
